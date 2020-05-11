@@ -2206,8 +2206,8 @@ var _ = Describe("Client Session", func() {
 
 		It("errors if the TransportParameters contain an original_connection_id, although no Retry was performed", func() {
 			params := &wire.TransportParameters{
-				OriginalConnectionID: protocol.ConnectionID{0xde, 0xca, 0xfb, 0xad},
-				StatelessResetToken:  &[16]byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16},
+				OriginalDestinationConnectionID: protocol.ConnectionID{0xde, 0xca, 0xfb, 0xad},
+				StatelessResetToken:             &[16]byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16},
 			}
 			expectClose()
 			qlogger.EXPECT().ReceivedTransportParameters(params)
@@ -2218,8 +2218,8 @@ var _ = Describe("Client Session", func() {
 		It("errors if the TransportParameters contain a wrong original_connection_id", func() {
 			sess.origDestConnID = protocol.ConnectionID{0xde, 0xad, 0xbe, 0xef}
 			params := &wire.TransportParameters{
-				OriginalConnectionID: protocol.ConnectionID{0xde, 0xca, 0xfb, 0xad},
-				StatelessResetToken:  &[16]byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16},
+				OriginalDestinationConnectionID: protocol.ConnectionID{0xde, 0xca, 0xfb, 0xad},
+				StatelessResetToken:             &[16]byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16},
 			}
 			expectClose()
 			qlogger.EXPECT().ReceivedTransportParameters(params)
